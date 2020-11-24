@@ -1,43 +1,61 @@
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-let jumpLine = 0
-function cardsBingo(item){
-    jumpLine += 1
-    var html = '<span id="span">' + item + '</span>'          
-    if(jumpLine == 5){
-        jumpLine = 0
-        html += '<br>'
-    }   
-    return document.body.innerHTML += html;
-}
-function rowBingo(minRow, maxRow){   
-    let array = []
-    let newArray = []
-    let control = 15
+function renderRowBingo(minRow, maxRow){
     
-    for (let i = 0 ; i < control; i++){
-        array.push(getRandom(minRow, maxRow))
-        if(newArray.length < 5){
-            newArray = array.filter((este,o)=>array.indexOf(este)==o)
+    function arrayBingo(){   
+        
+        let newArray = []
+        let array = []
+        let control = 5
+        
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min
         }
+        for (let i = 0; i <= control; i++){
+            array.push(getRandom(minRow, maxRow))
+            if(newArray.length < control){
+                newArray = array.filter((este,o)=>array.indexOf(este)==o)
+                i--
+            }
+        }
+        // console.log(newArray)
+        newArray.forEach(createRowBingo)
+        return newArray
     }
-    newArray.forEach(cardsBingo)
-    //console.log(newArray)
+
+    function createRowBingo(item){
+        let th = document.createElement('th')
+        console.log(th)
+        th.textContent = item
+
+        return th
+    }
+    
+    let item = arrayBingo()
+    
+    let rowOneBingo = document.querySelector('.rowOne')
+    // let rowOneBingo = document.querySelector('.rowTwo')
+    // let rowOneBingo = document.querySelector('.rowOne')
+    // let rowOneBingo = document.querySelector('.rowOne')
+    // let rowOneBingo = document.querySelector('.rowOne')
+    
+    let th = document.createElement('th')
+
+    rowOneBingo.innerHTML = ' '
+
+    for(i=0;i < item.length;i++){
+        let itens = item[i]        
+        if(itens[i] < 15){
+            console.log('Sou menor que 15 ')
+        }
+        let text = createRowBingo(itens, i)
+        
+        th.appendChild(text)
+    }
+    
+    rowOneBingo.appendChild(th)
 }
 
-function startCardsBingo(){
-    this.rowBingo(1,15)
-    this.rowBingo(16,30)
-    this.rowBingo(31,45)
-    this.rowBingo(46,60)
-    this.rowBingo(61,75)/**/
+function startRowBingo(){
+    this.renderRowBingo(1,15)
 }
-startCardsBingo()
 
-function reset(){
-    let controlReset = 25
-    for(let i =0;i<controlReset;i++)
-        $( "#span" ).remove()
-}
+startRowBingo()

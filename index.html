@@ -8,10 +8,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <button type="button" onclick="startCardsBingo()">Criar cartela de bingo</button>
-    <br>
-    <button type="button" onclick="reset()">reset</button>
-    <br>
+    <section id="buttons">
+        <button type="button" onclick="startRowBingo()">Criar cartela de bingo</button>
+        <button type="button" onclick="reset()">reset</button>
+    </section>
+   <section  id="cardsBingo">
+       <div class="cards">
+           <table class="tableCards">
+               <thead class="tableHead">
+                    <tr>
+                        <th>B</th>
+                        <th>I</th>
+                        <th>N</th>
+                        <th>G</th>
+                        <th>O</th>
+                    </tr>
+               </thead>
+               <tbody>
+                   <tr  class="rowOne"></tr>
+                   <tr  class="rowTwo"></tr>
+                   <tr  class="rowOne"></tr>
+                   <tr  class="rowOne"></tr>
+                   <tr  class="rowOne"></tr>
+               </tbody>
+           </table>
+       </div>
+    </section>
 
     <script src="./index.js"></script>
 </body>
