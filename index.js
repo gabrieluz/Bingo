@@ -1,4 +1,4 @@
-function renderRowBingo(minRow, maxRow){
+function renderRowBingo(minRow, maxRow, Row){
     
     function arrayBingo(){   
         
@@ -16,46 +16,45 @@ function renderRowBingo(minRow, maxRow){
                 i--
             }
         }
-        // console.log(newArray)
+        
         newArray.forEach(createRowBingo)
         return newArray
     }
-
     function createRowBingo(item){
-        let th = document.createElement('th')
-        console.log(th)
-        th.textContent = item
+        let td = document.createElement('td')
+        // console.log(th)
+        td.textContent = item
 
-        return th
+        return td
     }
     
+    //Limpa o html contido nas variáveis || Coloca um espaço em branco
+    Row.innerHTML = ' '
+    
+    let th = document.createElement('tr')
+    
     let item = arrayBingo()
-    
-    let rowOneBingo = document.querySelector('.rowOne')
-    // let rowOneBingo = document.querySelector('.rowTwo')
-    // let rowOneBingo = document.querySelector('.rowOne')
-    // let rowOneBingo = document.querySelector('.rowOne')
-    // let rowOneBingo = document.querySelector('.rowOne')
-    
-    let th = document.createElement('th')
-
-    rowOneBingo.innerHTML = ' '
-
     for(i=0;i < item.length;i++){
-        let itens = item[i]        
-        if(itens[i] < 15){
-            console.log('Sou menor que 15 ')
-        }
-        let text = createRowBingo(itens, i)
+        let itens = item[i]
+        let text = createRowBingo(itens)
         
         th.appendChild(text)
     }
-    
-    rowOneBingo.appendChild(th)
+    Row.appendChild(th)
 }
 
-function startRowBingo(){
-    this.renderRowBingo(1,15)
+function startCardBingo(){
+    let rowOneBingo = document.querySelector('.rowOne')
+    let rowTwoBingo = document.querySelector('.rowTwo')
+    let rowThreeBingo = document.querySelector('.rowThree')
+    let rowFourBingo = document.querySelector('.rowFour')
+    let rowFiveBingo = document.querySelector('.rowFive')
+
+    this.renderRowBingo(1,15, rowOneBingo)
+    this.renderRowBingo(16,30, rowTwoBingo)
+    this.renderRowBingo(31,45, rowThreeBingo)
+    this.renderRowBingo(46,60, rowFourBingo)
+    this.renderRowBingo(61,75, rowFiveBingo)
 }
 
-startRowBingo()
+startCardBingo()
